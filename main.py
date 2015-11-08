@@ -80,18 +80,18 @@ def weixin_hook_message():
 
 def level_info(level):
     lvs = [
-        dict(name='渣渣', number_min=1, number_max=5, time_limit=10),
-        dict(name='青铜', number_min=5, number_max=10, time_limit=15),
-        dict(name='白银1', number_min=10, number_max=50, time_limit=10),
-        dict(name='白银2', number_min=10, number_max=50, time_limit=10),
-        dict(name='黄金1', number_min=50, number_max=100, time_limit=10),
-        dict(name='黄金2', number_min=100, number_max=500, time_limit=15),
-        dict(name='黄金3', number_min=500, number_max=999, time_limit=15),
-        dict(name='黄金4', number_min=500, number_max=999, time_limit=10),
-        dict(name='钻石1', number_min=1000, number_max=5000, time_limit=15),
-        dict(name='钻石2', number_min=5000, number_max=9999, time_limit=10),
-        dict(name='钻石3', number_min=10000, number_max=50000, time_limit=10),
-        dict(name='钻石4', number_min=50000, number_max=99999, time_limit=10)
+        dict(name=u'渣渣', number_min=1, number_max=5, time_limit=10),
+        dict(name=u'青铜', number_min=5, number_max=10, time_limit=15),
+        dict(name=u'白银1', number_min=10, number_max=50, time_limit=10),
+        dict(name=u'白银2', number_min=10, number_max=50, time_limit=10),
+        dict(name=u'黄金1', number_min=50, number_max=100, time_limit=10),
+        dict(name=u'黄金2', number_min=100, number_max=500, time_limit=15),
+        dict(name=u'黄金3', number_min=500, number_max=999, time_limit=15),
+        dict(name=u'黄金4', number_min=500, number_max=999, time_limit=10),
+        dict(name=u'钻石1', number_min=1000, number_max=5000, time_limit=15),
+        dict(name=u'钻石2', number_min=5000, number_max=9999, time_limit=10),
+        dict(name=u'钻石3', number_min=10000, number_max=50000, time_limit=10),
+        dict(name=u'钻石4', number_min=50000, number_max=99999, time_limit=10)
     ]
 
     if level < len(lvs):
@@ -99,7 +99,7 @@ def level_info(level):
     else:
         number_min=10**level
         number_max=10**(level+1)-1
-        info = dict(name='王者', number_min=number_min, number_max=number_max, time_limit=15)
+        info = dict(name=u'王者', number_min=number_min, number_max=number_max, time_limit=15)
     return bunch.bunchify(info)
 
 
@@ -220,6 +220,7 @@ def question_answer(user, res):
         return '\n'.join([
                 u'回答正确',
                 u'恭喜您顺利晋级(最高级12级)',
+                u'获得称号 {}'.format(lv.name),
                 u'当前等级 {}'.format(user.level),
                 u'输入 1, 继续闯关'
             ])
@@ -243,8 +244,8 @@ def question_answer(user, res):
 def show(user):
     lv = level_info(user.level)
     return '\n'.join([
-        '等级 {}'.format(user.level),
-        # '称号 {}'.format(linfo.name)
+        u'等级 {}'.format(user.level),
+        u'称号 {}'.format(lv.name)
     ])
 
 def top(user_id):
