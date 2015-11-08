@@ -136,27 +136,27 @@ def check_answer(user, result):
         print 'NEXT QUES'
         if not time_limit_err:
             user.good_count += 1
-            # user.fail_count = 0
         else:
             user.fail_count += 1
         user.save()
-
+    else:
+        user.fail_count += 1
+        user.save()
 
     if user.good_count >= LEVEL_NEED_PASS:
         user.level += 1
         user.save()
         return RES_UPGRADE
 
-    if is_res_ok:
-        return RES_TLE_PASS if time_limit_err else RES_RIGHT
-
-    user.fail_count += 1
-    user.save()
-
-    print 'FAIL COUNT:', user.fail_count
     if user.fail_count >= LEVEL_MAX_RETRY:
         reset_level(user)
         return RES_WRONG_OVERFLOW
+
+    if is_res_ok:
+        if not time_limit_err:
+            return RES_RIGHT
+        else:
+            return RES_TLE_PASS
 
     return RES_WRONG
 
