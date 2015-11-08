@@ -1,1 +1,3 @@
-wechat-sdk>=2.6.0
+wechat-sdk==0.5.8
+bunch
+peewee
